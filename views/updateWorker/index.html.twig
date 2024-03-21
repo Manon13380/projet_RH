@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block header %}
+	{% include "layouts/_headerDashboard.html.twig" %}
+{% endblock %}
+{% block main %}
+	<main>
+		<section id="workerList">
+			<h2>Modifier un employé</h2>
+			<form action="/updateWorker/{{worker.id}}" method="post" enctype="multipart/form-data">
+				<div class="card-container">
+					<div id="updateCard" class="card">
+						<input name="image" type="file" value="{{worker.image}}">
+						<label for="name">Nom :</label>
+						<input id="name" name="name" type="text" value='{{worker.name}}'>
+						<label for="function">Fonction :</label>
+						<input id="function" name="function" type="text" value='{{worker.function}}'>
+						<label for="blame">Blâme :</label>
+						<input id="blame" name="blameNumber" type="text" value ='{{worker.blameNumber}}'>
+						<div class="button-container">
+							<button>Modifier</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</section>
+	</main>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block header %}
+	{% include "layouts/_headerDashboard.html.twig" %}
+{% endblock %}
+{% block main %}
+	<main>
+		<section id="workerList">
+			{% if user.workerList is not empty %}
+				<h2>Voici les employés
+					{{user.workerList[0]['function']}}</h2>
+				<div class="card-container">
+					{% for worker in user.workerList %}
+						<div class="card">
+							<img src="images/uploads/{{worker.image}}" alt="" width="150">
+							<p>Nom :
+								{{worker.name}}</p>
+							<p>Fonction :
+								{{worker.function}}
+							</p>
+							<div id="blameContainer">
+								<p>Nombre de blâme :
+									{{worker.blameNumber}}</p>
+								<a href="/addBlame/{{worker.id}}"><img src="/images/blâme.png" alt="" width="30"></a>
+							</div>
+							<div class="button-container">
+								<button>
+									<a href="/updateWorker/{{worker.id}}">Modifier</a>
+								</button>
+								<button>
+									<a href="/deleteWorker/{{worker.id}}">Supprimer</a>
+								</button>
+
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			{% else %}
+				<h2>Aucun employé trouvé avec cette fonction.</h2>
+			{% endif %}
+		{% endblock %}

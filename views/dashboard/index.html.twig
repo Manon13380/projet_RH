@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block header %}
+	{% include "layouts/_headerDashboard.html.twig" %}
+{% endblock %}
+{% block main %}
+	<main>
+		<section id="workerList">
+			<div class="titleContainer">
+				<h2>Liste des employées</h2>
+				<form class="filterContainer" method="POST" action="/filterByFunction">
+					<label for="filterFunction">Filtrer par fonction :</label>
+					<select id="filterFunction" name="function">
+						<option value="all">Toutes les fonctions</option>
+						{% set seen_functions = [] %}
+						{% for worker in user.workerList %}
+							{% if worker.function not in seen_functions %}
+								<option  value="{{ worker.function }}">{{worker.function }}</option>
+								{% set _ = seen_functions.push(worker.function) %}
+							{% endif %}
+						{% endfor %}
+					</select>
+					<button id="applyFilter">Filtrer</button>
+				</form>
+			</div>
+			<div class="card-container">
+				{% if user.workerList is not empty %}
+					{% for worker in user.workerList %}
+						<div class="card">
+							<img src="images/uploads/{{worker.image}}" alt="" width="150">
+							<p>Nom :
+								{{worker.name}}</p>
+							<p>Fonction :
+								{{worker.function}}
+							</p>
+							<div id="blameContainer">
+								<p>Nombre de blâme :
+									{{ worker.blameNumber}}</p>
+								<a href="/addBlame/{{worker.id}}"><img src="/images/blâme.png" alt="" width="30"></a>
+							</div>
+							<div class="button-container">
+								<button>
+									<a href="/updateWorker/{{worker.id}}">Modifier</a>
+								</button>
+								<button>
+									<a href="/deleteWorker/{{worker.id}}">Supprimer</a>
+								</button>
+
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			{% else %}
+				<p>Vous n'avez pas encore d'employé
+					<a href="/addWorker">Ajouter un employé</a>
+				</p>
+
+			{% endif %}
+		</section>
+	</main>
+{% endblock %}

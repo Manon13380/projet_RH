@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block header %}
+	{% include "layouts/_headerDashboard.html.twig" %}
+{% endblock %}
+{% block main %}
+	<main>
+		<section id="workerList">
+			<div class="titleContainer">
+				<h2>Liste des employés supprimés</h2>
+			</div>
+			<div class="card-container">
+				{% if user.workerDeleteList is not empty %}
+					{% for workerDelete in user.workerDeleteList %}
+						<div class="card">
+							<img src="images/uploads/{{workerDelete.image}}" alt="" width="150">
+							<p>Nom :
+								{{workerDelete.name}}</p>
+							<p>Fonction :
+								{{workerDelete.function}}
+							</p>
+							<div id="blameContainer">
+								<p>Nombre de blâme :
+									{{ workerDelete.blameNumber}}</p>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			{% else %}
+				<p>Vous n'avez pas encore d'employé supprimé
+				</p>
+
+			{% endif %}
+		</section>
+	</main>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+{% block title %}
+	<title>GestionRH - Connexion</title>
+{% endblock %}
+{% block header %}
+	{% include "layouts/_headerLogin.html.twig" %}
+{% endblock %}
+{% block main %}
+	<main id="loginMain">
+		<div class="login-container">
+			<h2>Bienvenue dans le portail dédié à la gestion des employés pour les entreprises.</h2>
+			<div class="login-form">
+				<h3>Connexion</h3>
+				<form action="/login" method="post">
+					<div class="form-group">
+						<label for="mail">Email:</label>
+						<input type="mail" id="mail" name="mail" required>
+						{% if error.mail is defined  %}
+							<p class="error">{{error.mail}}</p>
+						{% endif %}
+					</div>
+					<div class="form-group">
+						<label for="password">Mot de passe:</label>
+						<input type="password" id="password" name="password" required>
+						{% if error.password is defined  %}
+							<p class="error">{{error.password}}</p>
+						{% endif %}
+					</div>
+					<button>Se connecter</button>
+				</form>
+			</div>
+		</div>
+	</main>
+{% endblock %}

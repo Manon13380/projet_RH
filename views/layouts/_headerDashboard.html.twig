@@ -1,0 +1,18 @@
+<header>
+	<div class="container">
+			<h1>
+				<a href="/dashboard">GestionRH / {{userName}}</a>
+			</h1>
+		<div class="actions">
+			<a href="/addWorker" class="header-link">Ajouter un employé</a>
+			<form action="/searchWorker" class="search-bar" method="post">
+				<input id="searchInput" type="text" name="name" placeholder="Rechercher un employé...">
+				<button id="rechercher">
+					<img src="/images/chercher.png" alt="" width="25">
+				</button>
+			</form>
+			<a href="/workerDeleted"><img src="/images/poubelle.png" alt="" width="30"></a>
+			<a id="buttonDeconnexion" class="header-link" href="/">Deconnexion</a>
+		</div>
+	</div>
+</header>
